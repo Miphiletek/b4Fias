@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Migrations_bd
 {
-    class copy_b4_fiass
+    class copy_b4_fias
     {
         public int id { get; set; }
         public string coderecord { get; set; }

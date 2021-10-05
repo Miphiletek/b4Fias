@@ -141,20 +141,27 @@ namespace Migrations_bd
 
              using (ApplicationContext connection = new ApplicationContext())
              {
-               
-                var result = from s in connection.gar_AdmHierCon
-                             from j in connection.copy_b4_fias
+
+                var listing = (from orh in connection.gar_HousesCon
+                               select orh.OBJECTGUID).ToList();
+                var listing2 = (from jkl in connection.copy_b4_fias
+                                select jkl.parentguid).ToList();
+                var result = listing.Except(listing2).ToList();
+
+
+                var vstavka = (from s in connection.gar_AdmHierCon
+                             
                               join b in connection.gar_HousesCon on s.OBJECTID equals b.OBJECTID
                               join u in connection.gar_AddObjCon on s.PARENTOBJID equals u.OBJECTID
-                             where j.aoguid != u.OBJECTGUID
+                             
 
-                              select new copy_b4_fiass
+                              select new
                               {
 
 
-                                  coderecord = null,
+                                  coderecord = "",
                                   typerecord = 0,
-                                  aolevel = int.Parse(u.LEVEL),
+                                  aolevel =int.Parse(u.LEVEL),
                                   actstatus = 0,
                                   centstatus = 0,
                                   operstatus = 0,
@@ -169,83 +176,90 @@ namespace Migrations_bd
                                   offname = u.NAME,
                                   shortname = u.TYPENAME,
                                   regioncode = s.REGIONCODE,
-                                  autocode = null,
+                                  autocode = "",
                                   areacode = s.AREACODE,
                                   citycode = s.CITYCODE,
-                                  ctarcode = null,
+                                  ctarcode = "",
                                   placecode = s.PLACECODE,
                                   streetcode = s.STREETCODE,
-                                  extrcode = null,
-                                  sextcode = null,
-                                  postalcode = null,
-                                  ifnsfl = null,
-                                  terrifnsfl = null,
-                                  ifnsul = null,
-                                  terrifnsul = null,
-                                  okato = null,
+                                  extrcode = "",
+                                  sextcode = "",
+                                  postalcode = "",
+                                  ifnsfl = "",
+                                  terrifnsfl = "",
+                                  ifnsul = "",
+                                  terrifnsul = "",
+                                  okato = "",
                                   updatedate = u.UPDATEDATE,
-                                  normdoc = null,
-                                  kladrcode = null,
-                                  kladrplaincode = null,
+                                  normdoc = "",
+                                  kladrcode = "",
+                                  kladrplaincode = "",
                                   kladrpcurrstatus = 0,
-                                  mirror_guid = null,
-                                  oktmo = null
+                                  mirror_guid = "",
+                                  oktmo = ""
 
-                             };
-                foreach(var inb in result)
-                {
-                    Console.WriteLine(inb);
-                }
+                             });
                 
-                foreach(var obj in result)
-                {
-                    copy_b4_fiass copy_B4_ = new copy_b4_fiass
-                    {
-                        coderecord = obj.coderecord,
-                        typerecord = obj.typerecord,
-                        aolevel = obj.aolevel,
-                        actstatus = obj.actstatus,
-                        centstatus = obj.centstatus,
-                        operstatus = obj.operstatus,
-                        startdate = obj.startdate,
-                        enddate = obj.enddate,
-                        aoguid = obj.aoguid,
-                        aoid = obj.aoid,
-                        parentguid = obj.parentguid,
-                        previd = obj.previd,
-                        nextid = obj.nextid,
-                        formalname = obj.formalname,
-                        offname = obj.offname,
-                        shortname = obj.shortname,
-                        regioncode = obj.regioncode,
-                        autocode = obj.autocode,
-                        areacode = obj.areacode,
-                        citycode = obj.citycode,
-                        ctarcode = obj.ctarcode,
-                        placecode = obj.placecode,
-                        streetcode = obj.streetcode,
-                        extrcode = obj.extrcode,
-                        sextcode = obj.sextcode,
-                        postalcode = obj.postalcode,
-                        ifnsfl = obj.ifnsfl,
-                        terrifnsfl = obj.terrifnsfl,
-                        ifnsul = obj.ifnsul,
-                        terrifnsul = obj.terrifnsul,
-                        okato = obj.okato,
-                        updatedate = obj.updatedate,
-                        normdoc = obj.normdoc,
-                        kladrcode = obj.kladrcode,
-                        kladrplaincode = obj.kladrplaincode,
-                        kladrpcurrstatus = obj.kladrpcurrstatus,
-                        mirror_guid = obj.mirror_guid,
-                        oktmo = obj.oktmo
 
-                    };
-                    connection.copy_b4_fias.Add(copy_B4_);
+                //foreach(var inb in result.AsEnumerable<>)
+                //{
+                //    Console.WriteLine(inb.aoguid);
+                //}
+                
+                foreach(var obj in vstavka)
+                {
+                    if (result.Contains(obj.aoguid) == true)
+                    {
+                        copy_b4_fias copy_B4_ = new copy_b4_fias
+                        {
+                            coderecord = obj.coderecord,
+                            typerecord = obj.typerecord,
+                            aolevel = obj.aolevel,
+                            actstatus = obj.actstatus,
+                            centstatus = obj.centstatus,
+                            operstatus = obj.operstatus,
+                            startdate = obj.startdate,
+                            enddate = obj.enddate,
+                            aoguid = obj.aoguid,
+                            aoid = obj.aoid,
+                            parentguid = obj.parentguid,
+                            previd = obj.previd,
+                            nextid = obj.nextid,
+                            formalname = obj.formalname,
+                            offname = obj.offname,
+                            shortname = obj.shortname,
+                            regioncode = obj.regioncode,
+                            autocode = obj.autocode,
+                            areacode = obj.areacode,
+                            citycode = obj.citycode,
+                            ctarcode = obj.ctarcode,
+                            placecode = obj.placecode,
+                            streetcode = obj.streetcode,
+                            extrcode = obj.extrcode,
+                            sextcode = obj.sextcode,
+                            postalcode = obj.postalcode,
+                            ifnsfl = obj.ifnsfl,
+                            terrifnsfl = obj.terrifnsfl,
+                            ifnsul = obj.ifnsul,
+                            terrifnsul = obj.terrifnsul,
+                            okato = obj.okato,
+                            updatedate = obj.updatedate,
+                            normdoc = obj.normdoc,
+                            kladrcode = obj.kladrcode,
+                            kladrplaincode = obj.kladrplaincode,
+                            kladrpcurrstatus = obj.kladrpcurrstatus,
+                            mirror_guid = obj.mirror_guid,
+                            oktmo = obj.oktmo
+
+                        };
+                        connection.copy_b4_fias.Add(copy_B4_);
+                    }
+                    
                   
 
                 }
                 connection.SaveChanges();
+
 
 
                 //var intert = from nub in connection.copy_b4_fias

@@ -7,7 +7,7 @@ namespace Migrations_bd
         public DbSet<gar_address_objects> gar_AddObjCon { get; set; }
         public DbSet<gar_houses> gar_HousesCon { get; set; }
         public DbSet<gar_adm_hier> gar_AdmHierCon { get; set; }
-        public DbSet<copy_b4_fiass> copy_b4_fias { get; set; }
+        public DbSet<copy_b4_fias> copy_b4_fias { get; set; }
 
         public ApplicationContext()
         {
