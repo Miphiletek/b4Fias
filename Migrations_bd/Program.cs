@@ -6,6 +6,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Npgsql.EntityFrameworkCore;
+using System.Data.Entity;
+
 
 namespace Migrations_bd
 {
@@ -139,127 +141,208 @@ namespace Migrations_bd
 
 
 
-             using (ApplicationContext connection = new ApplicationContext())
-             {
+            using (ApplicationContext connection = new ApplicationContext())
+            {
 
-                var listing = (from orh in connection.gar_HousesCon
-                               select orh.OBJECTGUID).ToList();
+                //var listing = (from s1 in connection.gar_AdmHierCon
+                //               join u1 in connection.gar_AddObjCon on s1.PARENTOBJID equals u1.OBJECTID
+                //               where s1.PARENTOBJID == u1.OBJECTID
+                //               select u1.OBJECTGUID
+                //                      ).ToList();
+                var listing = (from s in connection.gar_AddObjCon
+                               select s.OBJECTGUID).ToList();
                 var listing2 = (from jkl in connection.copy_b4_fias
-                                select jkl.parentguid).ToList();
+                                select jkl.aoguid).ToList();
                 var result = listing.Except(listing2).ToList();
+                var result2 = from ty in connection.gar_AddObjCon
+                              select new { ty.UPDATEDATE, ty.STARTDATE, ty.ENDDATE};
+                foreach (var res in result2 )
+                {
+                    Console.WriteLine(res.ENDDATE);
+                    Console.WriteLine(res.STARTDATE);
 
+                }
+                //var vstavka2 = connection.gar_AdmHierCon.Join(connection.gar_AddObjCon,
+                //    s => s.PARENTOBJID,
+                //    u => u.OBJECTID,
+                //    (s, u) => new
+                //    {
+                //        coderecord = "",
+                //        typerecord = 0,
+                //        aolevel = int.Parse(u.LEVEL),
+                //        actstatus = 0,
+                //        centstatus = 0,
+                //        operstatus = 0,
+                //        startdate = u.STARTDATE,
+                //        enddate = u.ENDDATE,
+                //        aoguid = u.OBJECTGUID,
+                //        aoid = u.OBJECTID,
+                //        parentguid = (from s1 in connection.gar_AdmHierCon
+                //                      join u1 in connection.gar_AddObjCon on s1.PARENTOBJID equals u1.OBJECTID
+                //                      where s1.PARENTOBJID == u1.OBJECTID
+                //                      select u1.OBJECTGUID
+                //                            ).ToString(),
+
+                //        previd = u.PREVID,
+                //        nextid = u.NEXTID,
+                //        formalname = u.NAME,
+                //        offname = u.NAME,
+                //        shortname = u.TYPENAME,
+                //        regioncode = s.REGIONCODE,
+                //        autocode = "",
+                //        areacode = s.AREACODE,
+                //        citycode = s.CITYCODE,
+                //        ctarcode = "",
+                //        placecode = s.PLACECODE,
+                //        streetcode = s.STREETCODE,
+                //        extrcode = "",
+                //        sextcode = "",
+                //        postalcode = "",
+                //        ifnsfl = "",
+                //        terrifnsfl = "",
+                //        ifnsul = "",
+                //        terrifnsul = "",
+                //        okato = "",
+                //        updatedate = u.UPDATEDATE,
+                //        normdoc = "",
+                //        kladrcode = "",
+                //        kladrplaincode = "",
+                //        kladrpcurrstatus = 0,
+                //        mirror_guid = "",
+                //        oktmo = ""
+                //    });
 
                 var vstavka = (from s in connection.gar_AdmHierCon
-                             
-                              join b in connection.gar_HousesCon on s.OBJECTID equals b.OBJECTID
-                              join u in connection.gar_AddObjCon on s.PARENTOBJID equals u.OBJECTID
-                             
-
-                              select new
-                              {
+                               join u in connection.gar_AddObjCon on s.PARENTOBJID equals u.OBJECTID
 
 
-                                  coderecord = "",
-                                  typerecord = 0,
-                                  aolevel =int.Parse(u.LEVEL),
-                                  actstatus = 0,
-                                  centstatus = 0,
-                                  operstatus = 0,
-                                  startdate = u.STARTDATE,
-                                  enddate = u.ENDDATE,
-                                  aoguid = b.OBJECTGUID,
-                                  aoid = u.OBJECTID,
-                                  parentguid = u.OBJECTGUID,
-                                  previd = u.PREVID,
-                                  nextid = u.NEXTID,
-                                  formalname = u.NAME,
-                                  offname = u.NAME,
-                                  shortname = u.TYPENAME,
-                                  regioncode = s.REGIONCODE,
-                                  autocode = "",
-                                  areacode = s.AREACODE,
-                                  citycode = s.CITYCODE,
-                                  ctarcode = "",
-                                  placecode = s.PLACECODE,
-                                  streetcode = s.STREETCODE,
-                                  extrcode = "",
-                                  sextcode = "",
-                                  postalcode = "",
-                                  ifnsfl = "",
-                                  terrifnsfl = "",
-                                  ifnsul = "",
-                                  terrifnsul = "",
-                                  okato = "",
-                                  updatedate = u.UPDATEDATE,
-                                  normdoc = "",
-                                  kladrcode = "",
-                                  kladrplaincode = "",
-                                  kladrpcurrstatus = 0,
-                                  mirror_guid = "",
-                                  oktmo = ""
+                               select new NewClass(
 
-                             });
-                
+"",
+0,
+int.Parse(u.LEVEL),
+0,
+0,
+0,
+u.STARTDATE,
+u.ENDDATE,
+u.OBJECTGUID,
+u.OBJECTID,
+s.PARENTOBJID.ToString(),
+u.PREVID.ToString(),
+u.NEXTID.ToString() ,
+u.NAME,
+u.NAME,
+u.TYPENAME,
+s.REGIONCODE,
+"",
+s.AREACODE,
+s.CITYCODE,
+"",
+s.PLACECODE,
+s.STREETCODE,
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+u.UPDATEDATE,
+"",
+"",
+"",
+0,
+"",
+""
+
+                               )).ToList();
+
+
+
+
+
+
+                //Console.WriteLine(listing.Count);
+                //Console.WriteLine(listing2.Count);
+                //Console.WriteLine(vstavka.Count);
+                //Console.WriteLine(vstavka2.Count);
+                //foreach (var ing in vstavka)
+                //{
+                //    Console.WriteLine(ing);
+                //}
+
+
+               
+
+
+
 
                 //foreach(var inb in result.AsEnumerable<>)
                 //{
                 //    Console.WriteLine(inb.aoguid);
                 //}
-                
-                foreach(var obj in vstavka)
+
+                foreach (var obj in vstavka)
                 {
-                    if (result.Contains(obj.aoguid) == true)
-                    {
-                        copy_b4_fias copy_B4_ = new copy_b4_fias
+                    //if (result.Contains(obj.Aoguid))
+                    //{
+
+                    copy_b4_fias copy_B4_ = new copy_b4_fias
                         {
-                            coderecord = obj.coderecord,
-                            typerecord = obj.typerecord,
-                            aolevel = obj.aolevel,
-                            actstatus = obj.actstatus,
-                            centstatus = obj.centstatus,
-                            operstatus = obj.operstatus,
-                            startdate = obj.startdate,
-                            enddate = obj.enddate,
-                            aoguid = obj.aoguid,
-                            aoid = obj.aoid,
-                            parentguid = obj.parentguid,
-                            previd = obj.previd,
-                            nextid = obj.nextid,
-                            formalname = obj.formalname,
-                            offname = obj.offname,
-                            shortname = obj.shortname,
-                            regioncode = obj.regioncode,
-                            autocode = obj.autocode,
-                            areacode = obj.areacode,
-                            citycode = obj.citycode,
-                            ctarcode = obj.ctarcode,
-                            placecode = obj.placecode,
-                            streetcode = obj.streetcode,
-                            extrcode = obj.extrcode,
-                            sextcode = obj.sextcode,
-                            postalcode = obj.postalcode,
-                            ifnsfl = obj.ifnsfl,
-                            terrifnsfl = obj.terrifnsfl,
-                            ifnsul = obj.ifnsul,
-                            terrifnsul = obj.terrifnsul,
-                            okato = obj.okato,
-                            updatedate = obj.updatedate,
-                            normdoc = obj.normdoc,
-                            kladrcode = obj.kladrcode,
-                            kladrplaincode = obj.kladrplaincode,
-                            kladrpcurrstatus = obj.kladrpcurrstatus,
-                            mirror_guid = obj.mirror_guid,
-                            oktmo = obj.oktmo
+                           
+                            coderecord = obj.Coderecord,
+                            typerecord = obj.Typerecord,
+                            aolevel = obj.Aolevel,
+                            actstatus = obj.Actstatus,
+                            centstatus = obj.Centstatus,
+                            operstatus = obj.Operstatus,
+                            startdate = obj.Startdate ,
+                            enddate = obj.Enddate,
+                            aoguid = obj.Aoguid,
+                            aoid = obj.Aoid ,
+                            parentguid = obj.Parentguid,
+                            previd =long.Parse(obj.Previd),
+                            nextid = long.Parse(obj.Nextid),
+                            formalname = obj.Formalname,
+                            offname = obj.Offname,
+                            shortname = obj.Shortname,
+                            regioncode = obj.Regioncode,
+                            autocode = obj.Autocode,
+                            areacode = obj.Areacode,
+                            citycode = obj.Citycode,
+                            ctarcode = obj.Ctarcode,
+                            placecode = obj.Placecode,
+                            streetcode = obj.Streetcode,
+                            extrcode = obj.Extrcode,
+                            sextcode = obj.Sextcode,
+                            postalcode = obj.Postalcode,
+                            ifnsfl = obj.Ifnsfl.ToString(),
+                            terrifnsfl = obj.Terrifnsfl.ToString(),
+                            ifnsul = obj.Ifnsul,
+                            terrifnsul = obj.Terrifnsul.ToString(),
+                            okato = obj.Okato,
+                            updatedate = DateTime.Parse(obj.Updatedate.ToString()),
+                            normdoc = obj.Normdoc.ToString(),
+                            kladrcode = obj.Kladrcode.ToString(),
+                            kladrplaincode = obj.Kladrplaincode.ToString(),
+                            kladrpcurrstatus = int.Parse(obj.Kladrpcurrstatus.ToString()),
+                            mirror_guid = obj.Mirror_guid.ToString(),
+                            oktmo = obj.Oktmo.ToString()
 
                         };
                         connection.copy_b4_fias.Add(copy_B4_);
-                    }
-                    
-                  
+                        
+                    //}
+
+
+
+
 
                 }
-                connection.SaveChanges();
 
+                //connection.SaveChanges();
 
 
                 //var intert = from nub in connection.copy_b4_fias
@@ -340,5 +423,180 @@ namespace Migrations_bd
 
 
 
+    }
+
+    internal class NewClass
+    {
+       
+        public string Coderecord { get; set; }
+        public int Typerecord { get; set; }
+        public int Aolevel { get; set; }
+        public int Actstatus { get; set; }
+        public int Centstatus { get; set; }
+        public int Operstatus { get; set; }
+        public DateTime Startdate { get; set; }
+        public DateTime Enddate { get; set; }
+        public string Aoguid { get; set; }
+        public long Aoid { get; set; }
+        public string Parentguid { get; set; }
+        public string Previd { get; set; }
+        public string Nextid { get; set; }
+        public string Formalname { get; set; }
+        public string Offname { get; set; }
+        public string Shortname { get; set; }
+        public string Regioncode { get; set; }
+        public string Autocode { get; set; }
+        public string Areacode { get; set; }
+        public string Citycode { get; set; }
+        public string Ctarcode { get; set; }
+        public string Placecode { get; set; }
+        public string Streetcode { get; set; }
+        public string Extrcode { get; set; }
+        public string Sextcode { get; set; }
+        public string Postalcode { get; set; }
+        public string Ifnsfl { get; set; }
+        public string Terrifnsfl { get; set; }
+        public string Ifnsul { get; set; }
+        public string Terrifnsul { get; set; }
+        public string Okato { get; set; }
+        public DateTime Updatedate { get; set; }
+        public string Normdoc { get; set; }
+        public string Kladrcode { get; set; }
+        public string Kladrplaincode { get; set; }
+        public int Kladrpcurrstatus { get; set; }
+        public string Mirror_guid { get; set; }
+        public string Oktmo { get; set; }
+
+        public NewClass( string coderecord, int typerecord, int aolevel, int actstatus, int centstatus, int operstatus, DateTime startdate, DateTime enddate, string aoguid, long aoid, string parentguid, string previd, string nextid, string formalname, string offname, string shortname, string regioncode, string autocode, string areacode, string citycode, string ctarcode, string placecode, string streetcode, string extrcode, string sextcode, string postalcode, string ifnsfl, string terrifnsfl, string ifnsul, string terrifnsul, string okato, DateTime updatedate, string normdoc, string kladrcode, string kladrplaincode, int kladrpcurrstatus, string mirror_guid, string oktmo)
+        {
+           
+            Coderecord = coderecord;
+            Typerecord = typerecord;
+            Aolevel = aolevel;
+            Actstatus = actstatus;
+            Centstatus = centstatus;
+            Operstatus = operstatus;
+            Startdate = startdate;
+            Enddate = enddate;
+            Aoguid = aoguid;
+            Aoid = aoid;
+            Parentguid = parentguid;
+            Previd = previd;
+            Nextid = nextid;
+            Formalname = formalname;
+            Offname = offname;
+            Shortname = shortname;
+            Regioncode = regioncode;
+            Autocode = autocode;
+            Areacode = areacode;
+            Citycode = citycode;
+            Ctarcode = ctarcode;
+            Placecode = placecode;
+            Streetcode = streetcode;
+            Extrcode = extrcode;
+            Sextcode = sextcode;
+            Postalcode = postalcode;
+            Ifnsfl = ifnsfl;
+            Terrifnsfl = terrifnsfl;
+            Ifnsul = ifnsul;
+            Terrifnsul = terrifnsul;
+            Okato = okato;
+            Updatedate = updatedate;
+            Normdoc = normdoc;
+            Kladrcode = kladrcode;
+            Kladrplaincode = kladrplaincode;
+            Kladrpcurrstatus = kladrpcurrstatus;
+            Mirror_guid = mirror_guid;
+            Oktmo = oktmo;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is NewClass other &&
+                   
+                   Coderecord == other.Coderecord &&
+                   Typerecord == other.Typerecord &&
+                   Aolevel == other.Aolevel &&
+                   Actstatus == other.Actstatus &&
+                   Centstatus == other.Centstatus &&
+                   Operstatus == other.Operstatus &&
+                   Startdate == other.Startdate &&
+                   Enddate == other.Enddate &&
+                   Aoguid == other.Aoguid &&
+                   Aoid == other.Aoid &&
+                   Parentguid == other.Parentguid &&
+                   Previd == other.Previd &&
+                   Nextid == other.Nextid &&
+                   Formalname == other.Formalname &&
+                   Offname == other.Offname &&
+                   Shortname == other.Shortname &&
+                   Regioncode == other.Regioncode &&
+                   Autocode == other.Autocode &&
+                   Areacode == other.Areacode &&
+                   Citycode == other.Citycode &&
+                   Ctarcode == other.Ctarcode &&
+                   Placecode == other.Placecode &&
+                   Streetcode == other.Streetcode &&
+                   Extrcode == other.Extrcode &&
+                   Sextcode == other.Sextcode &&
+                   Postalcode == other.Postalcode &&
+                   Ifnsfl == other.Ifnsfl &&
+                   Terrifnsfl == other.Terrifnsfl &&
+                   Ifnsul == other.Ifnsul &&
+                   Terrifnsul == other.Terrifnsul &&
+                   Okato == other.Okato &&
+                   Updatedate == other.Updatedate &&
+                   Normdoc == other.Normdoc &&
+                   Kladrcode == other.Kladrcode &&
+                   Kladrplaincode == other.Kladrplaincode &&
+                   Kladrpcurrstatus == other.Kladrpcurrstatus &&
+                   Mirror_guid == other.Mirror_guid &&
+                   Oktmo == other.Oktmo;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+           
+            hash.Add(Coderecord);
+            hash.Add(Typerecord);
+            hash.Add(Aolevel);
+            hash.Add(Actstatus);
+            hash.Add(Centstatus);
+            hash.Add(Operstatus);
+            hash.Add(Startdate);
+            hash.Add(Enddate);
+            hash.Add(Aoguid);
+            hash.Add(Aoid);
+            hash.Add(Parentguid);
+            hash.Add(Previd);
+            hash.Add(Nextid);
+            hash.Add(Formalname);
+            hash.Add(Offname);
+            hash.Add(Shortname);
+            hash.Add(Regioncode);
+            hash.Add(Autocode);
+            hash.Add(Areacode);
+            hash.Add(Citycode);
+            hash.Add(Ctarcode);
+            hash.Add(Placecode);
+            hash.Add(Streetcode);
+            hash.Add(Extrcode);
+            hash.Add(Sextcode);
+            hash.Add(Postalcode);
+            hash.Add(Ifnsfl);
+            hash.Add(Terrifnsfl);
+            hash.Add(Ifnsul);
+            hash.Add(Terrifnsul);
+            hash.Add(Okato);
+            hash.Add(Updatedate);
+            hash.Add(Normdoc);
+            hash.Add(Kladrcode);
+            hash.Add(Kladrplaincode);
+            hash.Add(Kladrpcurrstatus);
+            hash.Add(Mirror_guid);
+            hash.Add(Oktmo);
+            return hash.ToHashCode();
+        }
     }
 }

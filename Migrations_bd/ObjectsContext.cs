@@ -17,6 +17,7 @@ namespace Migrations_bd
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Server=192.168.1.127;Database=samara_test_13092021;User ID=postgres;Password=1234;");
+            
         }
     }
 }
