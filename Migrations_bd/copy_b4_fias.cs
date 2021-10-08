@@ -16,7 +16,7 @@ namespace Migrations_bd
         public System.DateTime startdate { get; set; }
         public System.DateTime enddate { get; set; }
         public string aoguid { get; set; }
-        public long aoid { get; set; }
+        public string aoid { get; set; }
         public string parentguid { get; set; }
         public long previd { get; set; }
         public long nextid { get; set; }

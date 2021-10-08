@@ -15,112 +15,112 @@ namespace Migrations_bd
     {
         static void Main(string[] args)
         {
-            //System.Diagnostics.Stopwatch.StartNew();
-            //XmlDocument xDocADDR = new XmlDocument();
-            //xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_ADDR_OBJ.XML");
-            //// получим корневой элемент
-            //XElement rootElement = XElement.Parse(xDocADDR.InnerXml);
-            //xDocADDR = new XmlDocument();
-            //// обход всех узлов в корневом элементе
-            //ADDRESSOBJECTS addresobjs = DeserializeAddrObjs(rootElement);
-            //rootElement = null;
-            ////using (ApplicationContext db = new ApplicationContext())
-            //ApplicationContext db = new ApplicationContext();
-            ////{
-            //foreach (var obj in addresobjs.OBJECT.Where(x => x.ISACTUAL == ADDRESSOBJECTSOBJECTISACTUAL.Item1).Where(x => x.ISACTIVE == ADDRESSOBJECTSOBJECTISACTIVE.Item1))
+            System.Diagnostics.Stopwatch.StartNew();
+            XmlDocument xDocADDR = new XmlDocument();
+            xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_ADDR_OBJ.XML");
+            // получим корневой элемент
+            XElement rootElement = XElement.Parse(xDocADDR.InnerXml);
+            xDocADDR = new XmlDocument();
+            // обход всех узлов в корневом элементе
+            ADDRESSOBJECTS addresobjs = DeserializeAddrObjs(rootElement);
+            rootElement = null;
+            //using (ApplicationContext db = new ApplicationContext())
+            ApplicationContext db = new ApplicationContext();
             //{
-            //    gar_address_objects gar_addr_obj = new gar_address_objects
-            //    {
-            //        ISACTIVE = obj.ISACTIVE,
-            //        ID = obj.ID,
-            //        NAME = obj.NAME,
-            //        CHANGEID = obj.CHANGEID,
-            //        ENDDATE = obj.ENDDATE,
-            //        ISACTUAL = obj.ISACTUAL,
-            //        LEVEL = obj.LEVEL,
-            //        NEXTID = obj.NEXTID,
-            //        OBJECTGUID = obj.OBJECTGUID,
-            //        OBJECTID = obj.OBJECTID,
-            //        OPERTYPEID = obj.OPERTYPEID,
-            //        PREVID = obj.PREVID,
-            //        STARTDATE = obj.STARTDATE,
-            //        TYPENAME = obj.TYPENAME,
-            //        UPDATEDATE = obj.UPDATEDATE
-            //    };
-            //    db.gar_AddObjCon.Add(gar_addr_obj);
-            //}
-            //addresobjs = null;
+            foreach (var obj in addresobjs.OBJECT.Where(x => x.ISACTUAL == ADDRESSOBJECTSOBJECTISACTUAL.Item1).Where(x => x.ISACTIVE == ADDRESSOBJECTSOBJECTISACTIVE.Item1))
+            {
+                gar_address_objects gar_addr_obj = new gar_address_objects
+                {
+                    ISACTIVE = obj.ISACTIVE,
+                    ID = obj.ID,
+                    NAME = obj.NAME,
+                    CHANGEID = obj.CHANGEID,
+                    ENDDATE = obj.ENDDATE,
+                    ISACTUAL = obj.ISACTUAL,
+                    LEVEL = obj.LEVEL,
+                    NEXTID = obj.NEXTID,
+                    OBJECTGUID = obj.OBJECTGUID,
+                    OBJECTID = obj.OBJECTID,
+                    OPERTYPEID = obj.OPERTYPEID,
+                    PREVID = obj.PREVID,
+                    STARTDATE = obj.STARTDATE,
+                    TYPENAME = obj.TYPENAME,
+                    UPDATEDATE = obj.UPDATEDATE
+                };
+                db.gar_AddObjCon.Add(gar_addr_obj);
+            }
+            addresobjs = null;
 
-            //xDocADDR = null;
-            //xDocADDR = new XmlDocument();
-            //xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_HOUSES.XML");
+            xDocADDR = null;
+            xDocADDR = new XmlDocument();
+            xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_HOUSES.XML");
 
-            //rootElement = XElement.Parse(xDocADDR.InnerXml);
-            //HOUSES Houseobj = DeserializeHouses(rootElement);
-            //rootElement = null;
+            rootElement = XElement.Parse(xDocADDR.InnerXml);
+            HOUSES Houseobj = DeserializeHouses(rootElement);
+            rootElement = null;
 
-            //foreach (var house in Houseobj.HOUSE.Where(x => x.ISACTIVE == HOUSESHOUSEISACTIVE.Item1))
-            //{
-            //    gar_houses gar_house = new gar_houses
-            //    {
-            //        id = house.ID,
-            //        OBJECTID = house.OBJECTID,
-            //        HOUSETYPE = house.HOUSETYPE,
-            //        CHANGEID = house.CHANGEID,
-            //        HOUSENUM = house.HOUSENUM,
-            //        ADDNUM1 = house.ADDNUM1,
-            //        ADDNUM2 = house.ADDNUM2,
-            //        ADDTYPE1 = house.ADDTYPE1,
-            //        ADDTYPE2 = house.ADDTYPE2,
-            //        PREVID = house.PREVID,
-            //        NEXTID = house.NEXTID,
-            //        ENDDATE = house.ENDDATE,
-            //        ISACTUAL = house.ISACTUAL,
-            //        ISACTIVE = house.ISACTIVE,
-            //        OBJECTGUID = house.OBJECTGUID,
-            //        OPERTYPEID = house.OPERTYPEID,
-            //        STARTDATE = house.STARTDATE,
-            //        UPDATEDATE = house.UPDATEDATE
-            //    };
-            //    db.gar_HousesCon.Add(gar_house);
-            //}
-            //xDocADDR = null;
-            //xDocADDR = new XmlDocument();
-            //xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_ADM_HIER.XML");
+            foreach (var house in Houseobj.HOUSE.Where(x => x.ISACTIVE == HOUSESHOUSEISACTIVE.Item1))
+            {
+                gar_houses gar_house = new gar_houses
+                {
+                    id = house.ID,
+                    OBJECTID = house.OBJECTID,
+                    HOUSETYPE = house.HOUSETYPE,
+                    CHANGEID = house.CHANGEID,
+                    HOUSENUM = house.HOUSENUM,
+                    ADDNUM1 = house.ADDNUM1,
+                    ADDNUM2 = house.ADDNUM2,
+                    ADDTYPE1 = house.ADDTYPE1,
+                    ADDTYPE2 = house.ADDTYPE2,
+                    PREVID = house.PREVID,
+                    NEXTID = house.NEXTID,
+                    ENDDATE = house.ENDDATE,
+                    ISACTUAL = house.ISACTUAL,
+                    ISACTIVE = house.ISACTIVE,
+                    OBJECTGUID = house.OBJECTGUID,
+                    OPERTYPEID = house.OPERTYPEID,
+                    STARTDATE = house.STARTDATE,
+                    UPDATEDATE = house.UPDATEDATE
+                };
+                db.gar_HousesCon.Add(gar_house);
+            }
+            xDocADDR = null;
+            xDocADDR = new XmlDocument();
+            xDocADDR.Load(@"C:/Users/Dmitry/Desktop/AS_ADM_HIER.XML");
 
-            //rootElement = XElement.Parse(xDocADDR.InnerXml);
-            //ITEMS Adm_Delobj = DeserializeITEM(rootElement);
-            //rootElement = null;
-            //foreach (var adm_item in Adm_Delobj.ITEM)
-            //{
-            //    gar_adm_hier gar_item = new gar_adm_hier
-            //    {
-            //        id = adm_item.ID,
-            //        OBJECTID = adm_item.OBJECTID,
-            //        PARENTOBJID = adm_item.PARENTOBJID,
-            //        CHANGEID = adm_item.CHANGEID,
-            //        REGIONCODE = adm_item.REGIONCODE,
-            //        AREACODE = adm_item.AREACODE,
-            //        CITYCODE = adm_item.CITYCODE,
-            //        PLACECODE = adm_item.PLACECODE,
-            //        PLANCODE = adm_item.PLANCODE,
-            //        STREETCODE = adm_item.STREETCODE,
-            //        PREVID = adm_item.PREVID,
-            //        NEXTID = adm_item.NEXTID,
-            //        UPDATEDATE = adm_item.UPDATEDATE,
-            //        STARTDATE = adm_item.STARTDATE,
-            //        ENDDATE = adm_item.ENDDATE,
-            //        ISACTIVE = adm_item.ISACTIVE
-            //    };
-            //    db.gar_AdmHierCon.Add(gar_item);
-            //}
+            rootElement = XElement.Parse(xDocADDR.InnerXml);
+            ITEMS Adm_Delobj = DeserializeITEM(rootElement);
+            rootElement = null;
+            foreach (var adm_item in Adm_Delobj.ITEM)
+            {
+                gar_adm_hier gar_item = new gar_adm_hier
+                {
+                    id = adm_item.ID,
+                    OBJECTID = adm_item.OBJECTID,
+                    PARENTOBJID = adm_item.PARENTOBJID,
+                    CHANGEID = adm_item.CHANGEID,
+                    REGIONCODE = adm_item.REGIONCODE,
+                    AREACODE = adm_item.AREACODE,
+                    CITYCODE = adm_item.CITYCODE,
+                    PLACECODE = adm_item.PLACECODE,
+                    PLANCODE = adm_item.PLANCODE,
+                    STREETCODE = adm_item.STREETCODE,
+                    PREVID = adm_item.PREVID,
+                    NEXTID = adm_item.NEXTID,
+                    UPDATEDATE = adm_item.UPDATEDATE,
+                    STARTDATE = adm_item.STARTDATE,
+                    ENDDATE = adm_item.ENDDATE,
+                    ISACTIVE = adm_item.ISACTIVE
+                };
+                db.gar_AdmHierCon.Add(gar_item);
+            }
 
-            //db.SaveChanges();
-            //xDocADDR = new XmlDocument();
-            //xDocADDR.Load("C:/Users/Dmitry/Desktop/AS_ADM_HIER.XML");
-            //// получим корневой элемент
-            //XElement rootElementAdmin_Hier = XElement.Parse(xDocADDR.InnerXml);
-            //// обход всех узлов в корневом элементе
+            db.SaveChanges();
+            xDocADDR = new XmlDocument();
+            xDocADDR.Load("C:/Users/Dmitry/Desktop/AS_ADM_HIER.XML");
+            // получим корневой элемент
+            XElement rootElementAdmin_Hier = XElement.Parse(xDocADDR.InnerXml);
+            // обход всех узлов в корневом элементе
             //DataTable tableITEMS = new DataTable();
             //tableITEMS.Columns.Add("AdmObjID", typeof(String));
             //tableITEMS.Columns.Add("AdmParID", typeof(String));
@@ -132,7 +132,7 @@ namespace Migrations_bd
             //    dr3["HousesISA"] = long.Parse(obj.OBJECTID.ToString());
             //    dr3["HousesISA"] = long.Parse(obj.PARENTOBJID.ToString());
             //    dr3["HousesNum"] = obj.ISACTIVE.ToString();
-            //     tableHOUSES.Rows.Add(dr3);
+            //    tableHOUSES.Rows.Add(dr3);
             //    /*AdmObjID.Add(long.Parse(obj.OBJECTID.ToString()));
             //    AdmParID.Add(long.Parse(obj.PARENTOBJID.ToString()));
             //    AdmISACTIVE.Add(obj.ISACTIVE.ToString());*/
@@ -141,7 +141,7 @@ namespace Migrations_bd
 
 
 
-            using (ApplicationContext connection = new ApplicationContext())
+                using (ApplicationContext connection = new ApplicationContext())
             {
 
                 //var listing = (from s1 in connection.gar_AdmHierCon
@@ -150,18 +150,22 @@ namespace Migrations_bd
                 //               select u1.OBJECTGUID
                 //                      ).ToList();
                 var listing = (from s in connection.gar_AddObjCon
-                               select s.OBJECTGUID).ToList();
+                               select   s.OBJECTGUID).Distinct().ToList();
                 var listing2 = (from jkl in connection.copy_b4_fias
-                                select jkl.aoguid).ToList();
-                var result = listing.Except(listing2).ToList();
+                                select  jkl.aoguid).Distinct().ToList();
+                var result = listing2.Except(listing).ToList();
                 var result2 = from ty in connection.gar_AddObjCon
                               select new { ty.UPDATEDATE, ty.STARTDATE, ty.ENDDATE};
-                foreach (var res in result2 )
-                {
-                    Console.WriteLine(res.ENDDATE);
-                    Console.WriteLine(res.STARTDATE);
+                Console.WriteLine(listing.Count);
+                Console.WriteLine(listing2.Count);
+                Console.WriteLine(result.Count);
+                Console.WriteLine(listing.Count - listing2.Count);
 
-                }
+                GC.Collect();
+
+
+
+
                 //var vstavka2 = connection.gar_AdmHierCon.Join(connection.gar_AddObjCon,
                 //    s => s.PARENTOBJID,
                 //    u => u.OBJECTID,
@@ -213,7 +217,10 @@ namespace Migrations_bd
                 //    });
 
                 var vstavka = (from s in connection.gar_AdmHierCon
+
                                join u in connection.gar_AddObjCon on s.PARENTOBJID equals u.OBJECTID
+                               join k in connection.gar_AddObjCon on s.OBJECTID equals k.OBJECTID
+                               //where s.PARENTOBJID==u.OBJECTID
 
 
                                select new NewClass(
@@ -226,11 +233,11 @@ int.Parse(u.LEVEL),
 0,
 u.STARTDATE,
 u.ENDDATE,
-u.OBJECTGUID,
-u.OBJECTID,
-s.PARENTOBJID.ToString(),
+k.OBJECTGUID.ToString(),
+"",
+u.OBJECTGUID.ToString(),
 u.PREVID.ToString(),
-u.NEXTID.ToString() ,
+u.NEXTID.ToString(),
 u.NAME,
 u.NAME,
 u.TYPENAME,
@@ -257,24 +264,16 @@ u.UPDATEDATE,
 "",
 ""
 
-                               )).ToList();
+)).Distinct().ToList();
 
 
 
 
 
 
-                //Console.WriteLine(listing.Count);
-                //Console.WriteLine(listing2.Count);
-                //Console.WriteLine(vstavka.Count);
-                //Console.WriteLine(vstavka2.Count);
-                //foreach (var ing in vstavka)
-                //{
-                //    Console.WriteLine(ing);
-                //}
 
 
-               
+
 
 
 
@@ -286,55 +285,55 @@ u.UPDATEDATE,
 
                 foreach (var obj in vstavka)
                 {
-                    //if (result.Contains(obj.Aoguid))
-                    //{
+                    if(!listing2.Contains(obj.Aoguid))
+                    { 
 
                     copy_b4_fias copy_B4_ = new copy_b4_fias
-                        {
-                           
-                            coderecord = obj.Coderecord,
-                            typerecord = obj.Typerecord,
-                            aolevel = obj.Aolevel,
-                            actstatus = obj.Actstatus,
-                            centstatus = obj.Centstatus,
-                            operstatus = obj.Operstatus,
-                            startdate = obj.Startdate ,
-                            enddate = obj.Enddate,
-                            aoguid = obj.Aoguid,
-                            aoid = obj.Aoid ,
-                            parentguid = obj.Parentguid,
-                            previd =long.Parse(obj.Previd),
-                            nextid = long.Parse(obj.Nextid),
-                            formalname = obj.Formalname,
-                            offname = obj.Offname,
-                            shortname = obj.Shortname,
-                            regioncode = obj.Regioncode,
-                            autocode = obj.Autocode,
-                            areacode = obj.Areacode,
-                            citycode = obj.Citycode,
-                            ctarcode = obj.Ctarcode,
-                            placecode = obj.Placecode,
-                            streetcode = obj.Streetcode,
-                            extrcode = obj.Extrcode,
-                            sextcode = obj.Sextcode,
-                            postalcode = obj.Postalcode,
-                            ifnsfl = obj.Ifnsfl.ToString(),
-                            terrifnsfl = obj.Terrifnsfl.ToString(),
-                            ifnsul = obj.Ifnsul,
-                            terrifnsul = obj.Terrifnsul.ToString(),
-                            okato = obj.Okato,
-                            updatedate = DateTime.Parse(obj.Updatedate.ToString()),
-                            normdoc = obj.Normdoc.ToString(),
-                            kladrcode = obj.Kladrcode.ToString(),
-                            kladrplaincode = obj.Kladrplaincode.ToString(),
-                            kladrpcurrstatus = int.Parse(obj.Kladrpcurrstatus.ToString()),
-                            mirror_guid = obj.Mirror_guid.ToString(),
-                            oktmo = obj.Oktmo.ToString()
+                    {
 
-                        };
-                        connection.copy_b4_fias.Add(copy_B4_);
+                        coderecord = obj.Coderecord,
+                        typerecord = obj.Typerecord,
+                        aolevel = obj.Aolevel,
+                        actstatus = obj.Actstatus,
+                        centstatus = obj.Centstatus,
+                        operstatus = obj.Operstatus,
+                        startdate = obj.Startdate,
+                        enddate = obj.Enddate,
+                        aoguid = obj.Aoguid,
+                        aoid = obj.Aoid,
+                        parentguid = obj.Parentguid,
+                        previd = long.Parse(obj.Previd),
+                        nextid = long.Parse(obj.Nextid),
+                        formalname = obj.Formalname,
+                        offname = obj.Offname,
+                        shortname = obj.Shortname,
+                        regioncode = obj.Regioncode,
+                        autocode = obj.Autocode,
+                        areacode = obj.Areacode,
+                        citycode = obj.Citycode,
+                        ctarcode = obj.Ctarcode,
+                        placecode = obj.Placecode,
+                        streetcode = obj.Streetcode,
+                        extrcode = obj.Extrcode,
+                        sextcode = obj.Sextcode,
+                        postalcode = obj.Postalcode,
+                        ifnsfl = obj.Ifnsfl.ToString(),
+                        terrifnsfl = obj.Terrifnsfl.ToString(),
+                        ifnsul = obj.Ifnsul,
+                        terrifnsul = obj.Terrifnsul.ToString(),
+                        okato = obj.Okato,
+                        updatedate = DateTime.Parse(obj.Updatedate.ToString()),
+                        normdoc = obj.Normdoc.ToString(),
+                        kladrcode = obj.Kladrcode.ToString(),
+                        kladrplaincode = obj.Kladrplaincode.ToString(),
+                        kladrpcurrstatus = int.Parse(obj.Kladrpcurrstatus.ToString()),
+                        mirror_guid = obj.Mirror_guid.ToString(),
+                        oktmo = obj.Oktmo.ToString()
+
+                    };
+                    connection.copy_b4_fias.Add(copy_B4_);
                         
-                    //}
+                }
 
 
 
@@ -342,62 +341,65 @@ u.UPDATEDATE,
 
                 }
 
-                //connection.SaveChanges();
+                    //connection.SaveChanges();
 
 
-                //var intert = from nub in connection.copy_b4_fias
-                //             join ter in result on nub.aoguid! equals ter.aoguid
-                //             select new copy_b4_fias
-                //             {
+                    //var intert = from nub in connection.copy_b4_fias
+                    //             join ter in result on nub.aoguid! equals ter.aoguid
+                    //             select new copy_b4_fias
+                    //             {
 
-                //                 coderecord = "",
-                //                 typerecord = 0,
-                //                 aolevel = ter.aolevel,
-                //                 actstatus = ter.actstatus,
-                //                 centstatus = ter.centstatus,
-                //                 operstatus = ter.operstatus,
-                //                 startdate = ter.startdate,
-                //                 enddate = ter.enddate,
-                //                 aoguid = ter.aoguid,
-                //                 aoid = ter.aoid,
-                //                 parentguid = ter.parentguid,
-                //                 previd = ter.previd,
-                //                 nextid = ter.nextid,
-                //                 formalname = ter.formalname,
-                //                 offname = ter.offname,
-                //                 shortname = ter.shortname,
-                //                 regioncode = ter.regioncode,
-                //                 autocode = ter.autocode,
-                //                 areacode = ter.areacode,
-                //                 citycode = ter.citycode,
-                //                 ctarcode = "",
-                //                 placecode = ter.citycode,
-                //                 streetcode = ter.streetcode,
-                //                 extrcode = "",
-                //                 sextcode = "",
-                //                 postalcode = "",
-                //                 ifnsfl = "",
-                //                 terrifnsfl = "",
-                //                 ifnsul = "",
-                //                 terrifnsul = "",
-                //                 okato = "",
-                //                 updatedate = ter.updatedate,
-                //                 normdoc = "",
-                //                 kladrcode = "",
-                //                 kladrplaincode = "",
-                //                 kladrpcurrstatus = 0,
-                //                 mirror_guid = "",
-                //                 oktmo = ""
+                    //                 coderecord = "",
+                    //                 typerecord = 0,
+                    //                 aolevel = ter.aolevel,
+                    //                 actstatus = ter.actstatus,
+                    //                 centstatus = ter.centstatus,
+                    //                 operstatus = ter.operstatus,
+                    //                 startdate = ter.startdate,
+                    //                 enddate = ter.enddate,
+                    //                 aoguid = ter.aoguid,
+                    //                 aoid = ter.aoid,
+                    //                 parentguid = ter.parentguid,
+                    //                 previd = ter.previd,
+                    //                 nextid = ter.nextid,
+                    //                 formalname = ter.formalname,
+                    //                 offname = ter.offname,
+                    //                 shortname = ter.shortname,
+                    //                 regioncode = ter.regioncode,
+                    //                 autocode = ter.autocode,
+                    //                 areacode = ter.areacode,
+                    //                 citycode = ter.citycode,
+                    //                 ctarcode = "",
+                    //                 placecode = ter.citycode,
+                    //                 streetcode = ter.streetcode,
+                    //                 extrcode = "",
+                    //                 sextcode = "",
+                    //                 postalcode = "",
+                    //                 ifnsfl = "",
+                    //                 terrifnsfl = "",
+                    //                 ifnsul = "",
+                    //                 terrifnsul = "",
+                    //                 okato = "",
+                    //                 updatedate = ter.updatedate,
+                    //                 normdoc = "",
+                    //                 kladrcode = "",
+                    //                 kladrplaincode = "",
+                    //                 kladrpcurrstatus = 0,
+                    //                 mirror_guid = "",
+                    //                 oktmo = ""
 
-                //             };
-                //connection.copy_b4_fias.Add(result.Where(co)
-                connection.SaveChanges();
+                    //             };
+                    //connection.copy_b4_fias.Add(result.Where(co)
+                    connection.SaveChanges();
 
 
+                var b4_fias_house = (from ing in connection.gar_AdmHierCon
+                                     join jo in connection.gar_AddObjCon  on ing.PARENTOBJID equals jo.OBJECTID)
 
 
 
             }
+             
 
 
         }
@@ -437,7 +439,7 @@ u.UPDATEDATE,
         public DateTime Startdate { get; set; }
         public DateTime Enddate { get; set; }
         public string Aoguid { get; set; }
-        public long Aoid { get; set; }
+        public string Aoid { get; set; }
         public string Parentguid { get; set; }
         public string Previd { get; set; }
         public string Nextid { get; set; }
@@ -467,7 +469,7 @@ u.UPDATEDATE,
         public string Mirror_guid { get; set; }
         public string Oktmo { get; set; }
 
-        public NewClass( string coderecord, int typerecord, int aolevel, int actstatus, int centstatus, int operstatus, DateTime startdate, DateTime enddate, string aoguid, long aoid, string parentguid, string previd, string nextid, string formalname, string offname, string shortname, string regioncode, string autocode, string areacode, string citycode, string ctarcode, string placecode, string streetcode, string extrcode, string sextcode, string postalcode, string ifnsfl, string terrifnsfl, string ifnsul, string terrifnsul, string okato, DateTime updatedate, string normdoc, string kladrcode, string kladrplaincode, int kladrpcurrstatus, string mirror_guid, string oktmo)
+        public NewClass( string coderecord, int typerecord, int aolevel, int actstatus, int centstatus, int operstatus, DateTime startdate, DateTime enddate, string aoguid, string aoid, string parentguid, string previd, string nextid, string formalname, string offname, string shortname, string regioncode, string autocode, string areacode, string citycode, string ctarcode, string placecode, string streetcode, string extrcode, string sextcode, string postalcode, string ifnsfl, string terrifnsfl, string ifnsul, string terrifnsul, string okato, DateTime updatedate, string normdoc, string kladrcode, string kladrplaincode, int kladrpcurrstatus, string mirror_guid, string oktmo)
         {
            
             Coderecord = coderecord;
